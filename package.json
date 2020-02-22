@@ -1,0 +1,35 @@
+{
+    "name": "crypto-app-backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "server:dev": "nodemon --config \"./nodemon.json\"/",
+        "build": "rm -rf ./build/ && tsc",
+        "start": "node build/start.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Nachox07/crypto-app-backend.git"
+    },
+    "author": "Nacho Gonzalez-Garilleti",
+    "license": "UNLICENSED",
+    "bugs": {
+        "url": "https://github.com/Nachox07/crypto-app-backend/issues"
+    },
+    "homepage": "https://github.com/Nachox07/crypto-app-backend#readme",
+    "dependencies": {
+        "@types/express": "^4.17.2",
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "cross-env": "^6.0.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "nodemon": "^2.0.2",
+        "prettier": "^1.19.1",
+        "ts-node": "^8.6.2",
+        "tslib": "^1.11.0",
+        "typescript": "^3.8.2"
+    }
+}
