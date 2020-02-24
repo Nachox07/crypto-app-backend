@@ -1,7 +1,15 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, Db } from "mongodb";
 import { RequestHandler } from "express";
 
-const mongoMiddleware = (MongoDB: MongoClient): RequestHandler => (req: any, res, next): void => {
+declare global {
+    namespace Express {
+        export interface Request {
+            db: Db;
+        }
+    }
+}
+
+const mongoMiddleware = (MongoDB: MongoClient): RequestHandler => (req, res, next): void => {
     req.db = MongoDB.db("crypto-app-db-development");
     return next();
 };

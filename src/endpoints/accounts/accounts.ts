@@ -7,8 +7,8 @@ import { BTAccount } from "./types";
 const router = express.Router();
 
 router
-    .get("/", async (req: any, res: Response) => {
-        const accounts = await (req.db as Db)
+    .get("/", async (req, res: Response) => {
+        const accounts = await req.db
             .collection<BTAccount>("accounts")
             .find({}, { projection: { _id: false, transactions: false } })
             .toArray();
@@ -20,9 +20,9 @@ router
         celebrate({
             params: accountParamsSchema,
         }),
-        async (req: any, res: Response, next) => {
+        async (req, res: Response) => {
             const accountId = req.params.accountId;
-            const account = await (req.db as Db)
+            const account = await req.db
                 .collection<BTAccount>("accounts")
                 .findOne({ accountId }, { projection: { _id: false } });
 
