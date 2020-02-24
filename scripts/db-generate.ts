@@ -24,7 +24,7 @@ MongoClient.connect("mongodb://localhost:27017", { useNewUrlParser: true }, asyn
         for (let i = 1; i <= 10; i++) {
             transactions.push({
                 confirmedDate: faker.date.past(),
-                orderId: faker.finance.amount(),
+                orderId: faker.random.alphaNumeric(5),
                 orderCode: faker.random.word(),
                 transactionType: "PAYMENT RECEIVED",
                 credit: faker.finance.amount(10, 10000, 8),
