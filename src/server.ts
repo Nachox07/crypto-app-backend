@@ -1,6 +1,8 @@
 import express from "express";
 import { createServer } from "http";
 import socketIO from "socket.io";
+import { errors } from "celebrate";
+import morgan from "morgan";
 import DBConnection from "./db/connection";
 import dbMiddleware from "./db/middleware";
 import packageJson from "../package.json";
@@ -12,10 +14,13 @@ DBConnection()
         const app = express();
         const server = createServer(app);
         const io = socketIO.listen(server);
+        const errorHandlers = [errors()];
 
-        app.use(dbMiddleware(dbInstance));
+        app.use([dbMiddleware(dbInstance), morgan("common")]);
 
         app.use(endpoints);
+
+        app.use(errorHandlers);
 
         server.listen(8080, () => {
             console.log(`Environment: ${process.env.NODE_ENV}; App: ${packageJson.name}`);
