@@ -1,6 +1,6 @@
 import socketIO from "socket.io";
-import exchangeRateUpdateStream from "./exchangeRateUpdateStream";
-import accountUpdateStream from "./accountUpdateStream";
+import exchangeRateUpdateStream from "./exchange-rate-update-stream";
+import accountUpdateStream from "./account-update-stream";
 
 export default (socket: socketIO.Socket) => {
     exchangeRateUpdateStream(socket);

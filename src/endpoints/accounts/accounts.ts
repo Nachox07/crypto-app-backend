@@ -1,46 +1,25 @@
 import express, { Response } from "express";
-import { BTAccount, Exchanges } from "./types";
+import { BTAccount } from "./types";
+import { Db } from "mongodb";
 
 const router = express.Router();
 
 router
-    .get("/", async (req, res: Response) => {
-        // TODO: Retrieve data from database
-        const mockJson: { accounts: BTAccount[] } = {
-            accounts: [
-                {
-                    id: "1",
-                    name: "Filipito",
-                    category: "Deluxe",
-                    tag: "test",
-                    balance: 1,
-                    availableBalance: 1,
-                },
-                {
-                    id: "2",
-                    name: "Filipito",
-                    category: "Deluxe",
-                    tag: "test",
-                    balance: 1,
-                    availableBalance: 1,
-                },
-            ],
-        };
+    .get("/", async (req: any, res: Response) => {
+        const accounts = await (req.db as Db)
+            .collection<BTAccount>("accounts")
+            .find({}, { projection: { _id: false, transactions: false } })
+            .toArray();
 
-        res.status(200).json(mockJson);
+        res.status(200).json({ accounts });
     })
-    .get("/:accountId", async (req, res: Response) => {
-        // TODO: Retrieve data from database
-        const mockJson: BTAccount = {
-            id: "2",
-            name: "Filipito",
-            category: "Deluxe",
-            tag: "test",
-            balance: 1,
-            availableBalance: 1,
-        };
+    .get("/:accountId", async (req: any, res: Response) => {
+        const accountId = req.params.accountId;
+        const account = await (req.db as Db)
+            .collection<BTAccount>("accounts")
+            .findOne({ accountId }, { projection: { _id: false } });
 
-        res.status(200).json(mockJson);
+        res.status(200).json(account);
     });
 
 export default router;

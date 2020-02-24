@@ -1,12 +1,18 @@
+export type Transaction = {
+    confirmedDate: Date;
+    orderId: string;
+    orderCode: string;
+    transactionType: string;
+    credit: string;
+    balance: string;
+};
+
 export type BTAccount = {
-    id: string;
+    accountId: string;
     name: string;
     category: string;
     tag: string;
-    balance: number;
-    availableBalance: number;
-};
-
-export type Exchanges = {
-    bitcoin: number;
+    balance: string;
+    availableBalance: string;
+    transactions: Transaction[];
 };

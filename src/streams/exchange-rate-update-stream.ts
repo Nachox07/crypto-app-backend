@@ -1,10 +1,18 @@
 import socketIO from "socket.io";
 
+export type ExchangeRates = {
+    bitcoin: string;
+};
+
+type ExchangeRateUpdate = {
+    exchangeRates: ExchangeRates;
+};
+
 const exchangeRateUpdateStream = (socket: socketIO.Socket) => {
     const emitExchangeRateUpdate = () => {
         socket.emit("exchangeRatesUpdate", {
-            exchangeRates: { bitcoin: parseFloat((Math.random() * 10).toString()).toFixed(2) },
-        });
+            exchangeRates: { bitcoin: Number(Math.random() * 10).toFixed(10) },
+        } as ExchangeRateUpdate);
     };
 
     emitExchangeRateUpdate();
