@@ -8,6 +8,7 @@ import dbMiddleware from "./db/middleware";
 import packageJson from "../package.json";
 import endpoints from "./endpoints";
 import streams from "./streams";
+import headers from "./middlewares/headers";
 
 DBConnection()
     .then(dbInstance => {
@@ -16,7 +17,7 @@ DBConnection()
         const io = socketIO.listen(server);
         const errorHandlers = [errors()];
 
-        app.use([dbMiddleware(dbInstance), morgan("common")]);
+        app.use([headers, dbMiddleware(dbInstance), morgan("common")]);
 
         app.use(endpoints);
 
