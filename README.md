@@ -1,4 +1,4 @@
-# crypto-app-frontend
+# crypto-app-backend
 
 ## Quick introduction
 
