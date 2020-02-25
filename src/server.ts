@@ -14,7 +14,7 @@ DBConnection()
     .then(dbInstance => {
         const app = express();
         const server = createServer(app);
-        const io = socketIO.listen(server);
+        const socketServer = socketIO.listen(server);
         const errorHandlers = [errors()];
 
         app.use([headers, dbMiddleware(dbInstance), morgan("common")]);
@@ -27,7 +27,7 @@ DBConnection()
             console.log(`Environment: ${process.env.NODE_ENV}; App: ${packageJson.name}`);
         });
 
-        io.on("connection", streams);
+        streams(socketServer);
     })
     .catch(err => {
         console.error(err);

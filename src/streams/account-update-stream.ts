@@ -2,11 +2,11 @@ import socketIO from "socket.io";
 import faker from "faker";
 import { BTAccount } from "src/endpoints/accounts/types";
 
-const accountUpdateStream = (socket: socketIO.Socket) => {
+const accountUpdateStream = (socketServer: socketIO.Server) => {
     const emitAccountUpdate = () => {
         const randomAccountIdToUpdate = Math.round(Math.random() * 10);
 
-        socket.emit(`account-${randomAccountIdToUpdate}`, {
+        socketServer.emit(`account-${randomAccountIdToUpdate}`, {
             balance: faker.finance.amount(10, 10000, 8),
         } as { balance: BTAccount["balance"] });
     };

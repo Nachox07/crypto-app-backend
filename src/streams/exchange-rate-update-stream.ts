@@ -8,9 +8,9 @@ type ExchangeRateUpdate = {
     exchangeRates: ExchangeRates;
 };
 
-const exchangeRateUpdateStream = (socket: socketIO.Socket) => {
+const exchangeRateUpdateStream = (socketServer: socketIO.Server) => {
     const emitExchangeRateUpdate = () => {
-        socket.emit("exchangeRatesUpdate", {
+        socketServer.emit("exchangeRatesUpdate", {
             exchangeRates: { bitcoin: Number(Math.random() * 10).toFixed(10) },
         } as ExchangeRateUpdate);
     };
