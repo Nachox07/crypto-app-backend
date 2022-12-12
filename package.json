@@ -34,7 +34,7 @@
         "@types/morgan": "^1.7.37",
         "@types/socket.io": "^2.1.4",
         "celebrate": "^11.0.1",
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "faker": "^4.1.0",
         "joi": "^14.3.1",
         "mongodb": "^3.5.3",
